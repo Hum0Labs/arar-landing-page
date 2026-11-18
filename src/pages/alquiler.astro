@@ -2,614 +2,700 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import PageHeroCanvas from '../components/PageHeroCanvas.astro';
+import DeviceArt from '../components/alquiler/DeviceArt.astro';
+import '../styles/alquiler.css';
+import {
+  contact,
+  facts,
+  brands,
+  capabilities,
+  customerLogos,
+  customerStory,
+  equipment,
+  demoSteps,
+  demoScenarios,
+  plans,
+  planRows,
+  requirements,
+  lifecycle,
+  faqs,
+} from '../data/alquiler';
+
+const base = import.meta.env.BASE_URL;
+const trackSteps = ['Alistamiento', 'Configuración', 'Despacho', 'Entregado'];
+const clientData = {
+  contact,
+  equipment: equipment.map(({ id, name, singular, profiles }) => ({ id, name, singular, profiles })),
+  scenarios: demoScenarios.map(({ id, selection, modality }) => ({ id, selection, modality })),
+  lifecycle,
+};
 ---
 
-<Layout title="Alquiler de Equipos IT — ARAR Representaciones" description="Alquile computadores, servidores, impresoras y más con entrega local y soporte incluido. Sin inversión de capital, períodos flexibles.">
+<Layout
+  title="Alquiler y arrendamiento de equipos IT — ARAR Representaciones"
+  description="Alquile o arriende portátiles, equipos de escritorio, monitores, servidores e impresión para su empresa, con entrega local y soporte técnico incluido. Solicite su cotización."
+>
+  <script is:inline>
+    document.documentElement.classList.add('rl-js');
+  </script>
   <Header />
 
-  <main>
-    <!-- Mini Hero -->
-    <section class="hero">
-      <PageHeroCanvas variant="alquiler" />
-      <div class="hero__container">
-        <span class="badge badge--renting animate-on-scroll">Alquiler de Equipos IT</span>
-        <h1 class="hero__heading animate-on-scroll">Tecnología sin inversión de capital</h1>
-        <p class="hero__subtitle animate-on-scroll">Alquile equipos de cómputo, servidores, impresoras y más con entrega local y soporte incluido.</p>
+  <main class="rl" id="contenido">
+    <!-- ============================================================
+         1. OFERTA
+         ============================================================ -->
+    <section class="rl-hero">
+      <div class="rl-hero__grid" aria-hidden="true"></div>
+      <div class="container rl-hero__inner">
+        <p class="rl-pill rl-reveal">
+          <span class="rl-pill__dot" aria-hidden="true"></span>
+          Alquiler y arrendamiento de equipos IT · Desde 2003
+        </p>
+        <h1 class="rl-hero__title rl-reveal" style="--d: 60ms">
+          Tecnología para su empresa,
+          <span class="rl-accent">sin comprarla.</span>
+        </h1>
+        <p class="rl-hero__sub rl-reveal" style="--d: 120ms">
+          Alquilamos y arrendamos portátiles, equipos de escritorio, monitores, servidores e impresión a empresas en
+          Colombia, con entrega local y soporte técnico incluido. Nuestra plataforma lleva el control de cada equipo,
+          de la solicitud a la devolución.
+        </p>
+        <div class="rl-capsule rl-reveal" style="--d: 180ms">
+          <a href="#cotizacion" class="rl-btn rl-btn--primary" data-track="cta_cotizar" data-track-origin="hero">
+            Solicitar cotización
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#plataforma" class="rl-btn rl-btn--quiet" data-track="cta_plataforma" data-track-origin="hero">
+            Explorar la plataforma
+          </a>
+        </div>
       </div>
-    </section>
 
-    <!-- Content Section -->
-    <section class="content">
-      <div class="content__container">
-        <div class="content__grid">
-          <div class="content__description animate-on-scroll">
-            <h2 class="content__title">Equipos de tecnología en alquiler</h2>
-            <p class="content__text">
-              Desde 2003 proveemos a empresas colombianas con equipos de tecnología en modalidad de alquiler. Sin inversión de capital, con soporte técnico incluido y períodos flexibles.
-            </p>
-            <p class="content__text">
-              Nuestro modelo le permite acceder a la tecnología más reciente sin comprometer su flujo de caja, con la tranquilidad de contar con soporte técnico dedicado.
-            </p>
+      <div class="container">
+        <div class="rl-stage rl-reveal" style="--d: 240ms" aria-hidden="true">
+          <svg class="rl-stage__links" viewBox="0 0 1200 460" preserveAspectRatio="none" fill="none">
+            <path d="M300 120 C380 120 400 190 470 200" />
+            <path d="M900 110 C820 110 800 180 730 195" />
+            <path d="M310 350 C390 350 410 300 480 290" />
+            <path d="M890 360 C810 360 790 300 720 290" />
+          </svg>
+
+          <div class="rl-stage__device" data-depth="0.02">
+            <DeviceArt kind="laptop" />
           </div>
 
-          <div class="content__products animate-on-scroll">
-            <h3 class="products__title">Equipos disponibles</h3>
-            <div class="products__grid">
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </span>
-                <span class="products__label">Computadores de escritorio</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/></svg>
-                </span>
-                <span class="products__label">Portátiles</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                </span>
-                <span class="products__label">Servidores</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"/><polygon points="12 15 17 21 7 21 12 15"/></svg>
-                </span>
-                <span class="products__label">Proyectores</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </span>
-                <span class="products__label">Monitores</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-                </span>
-                <span class="products__label">Equipos audiovisuales</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                </span>
-                <span class="products__label">Fotocopiadoras</span>
-              </div>
-              <div class="products__card">
-                <span class="products__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                </span>
-                <span class="products__label">Impresoras</span>
+          <div class="rl-float rl-float--a" data-depth="0.07">
+            <div class="rl-float__inner">
+              <p class="rl-float__label">Nueva solicitud</p>
+              <p class="rl-float__title">12 portátiles · perfil Desarrollo</p>
+              <div class="rl-float__chips"><span>12 meses</span><span>Arrendamiento</span></div>
+            </div>
+          </div>
+
+          <div class="rl-float rl-float--b" data-depth="0.11">
+            <div class="rl-float__inner">
+              <p class="rl-float__label">Inventario</p>
+              <ul class="rl-float__rows">
+                <li><span>Portátiles</span><i style="--w: 78%"></i><b>Disponible</b></li>
+                <li><span>Monitores</span><i style="--w: 92%"></i><b>Disponible</b></li>
+                <li><span>Servidores</span><i style="--w: 46%"></i><b>Disponible</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rl-float rl-float--c" data-depth="0.12">
+            <div class="rl-float__inner rl-float__inner--row">
+              <span class="rl-check" aria-hidden="true"></span>
+              <div>
+                <p class="rl-float__title">Cotización aprobada</p>
+                <p class="rl-float__meta">Revisada por Gerencia de TI</p>
               </div>
             </div>
           </div>
+
+          <div class="rl-float rl-float--d" data-depth="0.06">
+            <div class="rl-float__inner">
+              <p class="rl-float__label">Entrega</p>
+              <ol class="rl-float__track">
+                <li class="is-done">Alistamiento</li>
+                <li class="is-done">Despacho</li>
+                <li class="is-now">Entregado</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <p class="rl-stage__caption">Interfaz ilustrativa con datos de ejemplo.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. CONFIANZA
+         ============================================================ -->
+    <section class="rl-section rl-trust" id="confianza" aria-labelledby="t-confianza">
+      <div class="container">
+        <div class="rl-head">
+          <p class="rl-eyebrow rl-reveal">Respaldo</p>
+          <h2 class="rl-title rl-reveal" id="t-confianza">
+            Más de veinte años equipando empresas.
+            <span class="rl-accent">Con soporte incluido.</span>
+          </h2>
+        </div>
+
+        <dl class="rl-cells rl-cells--4 rl-reveal">
+          {facts.map((f) => (
+            <div class="rl-cell rl-fact">
+              <dt class="rl-fact__label">{f.label}</dt>
+              <dd class="rl-fact__value">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        {customerLogos.length > 0 && (
+          <div class="rl-logos rl-reveal">
+            <p class="rl-logos__title">Empresas que confían en ARAR</p>
+            <ul class="rl-cells rl-logos__list" style={`--cols: ${Math.min(customerLogos.length, 6)}`}>
+              {customerLogos.map((l) => (
+                <li class="rl-cell"><img src={`${base}${l.src.replace(/^\//, '')}`} alt={l.name} loading="lazy" height="32" /></li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <ul class="rl-caps">
+          {capabilities.map((c, i) => (
+            <li class="rl-cap rl-reveal" style={`--d: ${i * 70}ms`}>
+              <span class="rl-check" aria-hidden="true"></span>
+              <h3 class="rl-cap__title">{c.title}</h3>
+              <p class="rl-cap__text">{c.text}</p>
+            </li>
+          ))}
+        </ul>
+
+        {customerStory && (
+          <article class="rl-story rl-reveal">
+            <div class="rl-story__main">
+              <p class="rl-eyebrow">Historia de cliente · {customerStory.sector}</p>
+              <h3 class="rl-story__title">{customerStory.company}</h3>
+              <dl class="rl-story__steps">
+                <div><dt>Reto</dt><dd>{customerStory.challenge}</dd></div>
+                <div><dt>Solución</dt><dd>{customerStory.solution}</dd></div>
+                <div><dt>Resultado</dt><dd>{customerStory.result}</dd></div>
+              </dl>
+            </div>
+            <div class="rl-story__side">
+              {customerStory.quote && (
+                <blockquote>
+                  <p>«{customerStory.quote}»</p>
+                  {customerStory.author && <footer>{customerStory.author}</footer>}
+                </blockquote>
+              )}
+              {customerStory.metrics?.map((m) => (
+                <p class="rl-story__metric"><strong>{m.value}</strong>{m.label}</p>
+              ))}
+            </div>
+          </article>
+        )}
+
+        <div class="rl-brands rl-reveal">
+          <p class="rl-brands__title">Marcas que manejamos</p>
+          <ul class="rl-brands__list">
+            {brands.map((b) => <li>{b}</li>)}
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Brands Section -->
-    <section class="brands">
-      <div class="brands__container">
-        <h2 class="brands__heading animate-on-scroll">Marcas que manejamos</h2>
-        <div class="brands__grid animate-on-scroll">
-          <div class="brands__item">Samsung</div>
-          <div class="brands__item">Ricoh</div>
-          <div class="brands__item">Epson</div>
-          <div class="brands__item">Kyocera</div>
-          <div class="brands__item">Apple</div>
-          <div class="brands__item">Lenovo</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Outsourcing Section -->
-    <section class="outsourcing">
-      <div class="outsourcing__container">
-        <div class="outsourcing__content animate-on-scroll">
-          <h2 class="outsourcing__heading">Outsourcing de Impresión</h2>
-          <p class="outsourcing__text">
-            Ofrecemos un servicio integral de outsourcing de impresión que incluye todo lo que su empresa necesita para operar sin preocupaciones.
+    <!-- ============================================================
+         3. EQUIPOS
+         ============================================================ -->
+    <section class="rl-section rl-section--white" id="equipos" aria-labelledby="t-equipos">
+      <div class="container">
+        <div class="rl-head rl-head--split">
+          <div>
+            <p class="rl-eyebrow rl-reveal">Equipos</p>
+            <h2 class="rl-title rl-reveal" id="t-equipos">
+              Arme su solicitud.
+              <span class="rl-accent">Nosotros la cotizamos.</span>
+            </h2>
+          </div>
+          <p class="rl-lead rl-reveal">
+            Elija el tipo de equipo, el perfil de uso y la cantidad. Su selección viaja con usted hasta el formulario
+            de cotización.
           </p>
-          <div class="outsourcing__features">
-            <div class="outsourcing__feature">
-              <span class="outsourcing__feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-              </span>
-              <div>
-                <h4 class="outsourcing__feature-title">Hardware</h4>
-                <p class="outsourcing__feature-text">Equipos de impresión de última generación instalados y configurados.</p>
+        </div>
+
+        <div class="rl-eq-grid">
+          {equipment.map((e, i) => (
+            <article class="rl-eq rl-reveal" style={`--d: ${(i % 3) * 80}ms`} data-eq={e.id}>
+              <div class="rl-eq__art">
+                <DeviceArt kind={e.art} />
+                <span class="rl-eq__tag" aria-hidden="true">En su cotización</span>
               </div>
+              <div class="rl-eq__body">
+                <h3 class="rl-eq__name">{e.name}</h3>
+                <p class="rl-eq__desc">{e.desc}</p>
+                <div class="rl-eq__define">
+                  <p>Usted define</p>
+                  <ul>{e.define.map((d) => <li>{d}</li>)}</ul>
+                </div>
+                <fieldset class="rl-eq__profiles">
+                  <legend>Perfil</legend>
+                  {e.profiles.map((p, pi) => (
+                    <label class="rl-chip">
+                      <input type="radio" name={`perfil-${e.id}`} value={p} checked={pi === 0} />
+                      <span>{p}</span>
+                    </label>
+                  ))}
+                </fieldset>
+                <div class="rl-stepper" role="group" aria-label={`Cantidad de ${e.name.toLowerCase()}`}>
+                  <button type="button" class="rl-stepper__btn" data-step="-1" aria-label={`Quitar un equipo: ${e.name}`}>−</button>
+                  <input
+                    class="rl-stepper__input"
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    max="999"
+                    value="0"
+                    aria-label={`Cantidad: ${e.name}`}
+                  />
+                  <button type="button" class="rl-stepper__btn" data-step="1" aria-label={`Agregar un equipo: ${e.name}`}>+</button>
+                  <span class="rl-stepper__hint">Agregar</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p class="rl-note rl-reveal">
+          Marcas, modelos y configuraciones se confirman según disponibilidad en su cotización.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. DEMOSTRACIÓN DE LA PLATAFORMA
+         ============================================================ -->
+    <section class="rl-section rl-demo" id="plataforma" aria-labelledby="t-plataforma">
+      <div class="container">
+        <div class="rl-head rl-head--split">
+          <div>
+            <p class="rl-eyebrow rl-reveal">La plataforma</p>
+            <h2 class="rl-title rl-reveal" id="t-plataforma">
+              De una solicitud a equipos entregados,
+              <span class="rl-accent">paso a paso.</span>
+            </h2>
+          </div>
+          <p class="rl-lead rl-reveal">
+            Un agente toma su solicitud, consulta el inventario y prepara la cotización. Una persona aprueba antes de
+            comprometer equipos. Elija un caso y véalo avanzar.
+          </p>
+        </div>
+
+        <div class="rl-demo__scenarios rl-reveal" role="group" aria-label="Caso de ejemplo">
+          {demoScenarios.map((s, i) => (
+            <button type="button" class="rl-tab" data-scenario={s.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        <div class="rl-demo__layout rl-reveal">
+          <ol class="rl-steps">
+            {demoSteps.map((s, i) => (
+              <li class="rl-steps__item">
+                <button type="button" class="rl-step" data-step-index={i} aria-current={i === 0 ? 'step' : undefined}>
+                  <span class="rl-step__num" aria-hidden="true">{i + 1}</span>
+                  <span class="rl-step__copy">
+                    <span class="rl-step__title">{s.title}</span>
+                    <span class="rl-step__text">{s.text}</span>
+                  </span>
+                  <span class="rl-step__bar" aria-hidden="true"><i></i></span>
+                </button>
+              </li>
+            ))}
+          </ol>
+
+          <div class="rl-window">
+            <div class="rl-window__bar">
+              <span class="rl-window__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="rl-window__name">Agente de solicitudes</span>
+              <span class="rl-window__badge">Datos de ejemplo</span>
             </div>
-            <div class="outsourcing__feature">
-              <span class="outsourcing__feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              </span>
-              <div>
-                <h4 class="outsourcing__feature-title">Software</h4>
-                <p class="outsourcing__feature-text">Soluciones de gestión y monitoreo de impresión para control total.</p>
-              </div>
+
+            <div class="rl-window__body" aria-live="polite">
+              {demoScenarios.map((sc, si) => (
+                <div class="rl-scn" data-scenario-panel={sc.id} hidden={si !== 0}>
+                  <!-- 1 Solicitud -->
+                  <div class="rl-stagep" data-stage="0">
+                    <p class="rl-stagep__kicker">Solicitud recibida</p>
+                    <blockquote class="rl-bubble">{sc.request}</blockquote>
+                    <p class="rl-stagep__kicker rl-stagep__kicker--agent" style="--i: 2">El agente identifica</p>
+                    <dl class="rl-parsed">
+                      {sc.parsed.map(([k, v], i) => (
+                        <div style={`--i: ${i + 3}`}><dt>{k}</dt><dd>{v}</dd></div>
+                      ))}
+                    </dl>
+                  </div>
+
+                  <!-- 2 Inventario -->
+                  <div class="rl-stagep" data-stage="1">
+                    <p class="rl-stagep__kicker">Consulta de inventario</p>
+                    <ul class="rl-stock">
+                      {sc.stock.map((r, i) => {
+                        const ok = r.available >= r.need;
+                        return (
+                          <li style={`--i: ${i + 1}`}>
+                            <div class="rl-stock__top">
+                              <span class="rl-stock__item">{r.item}</span>
+                              <span class:list={['rl-badge', ok ? 'rl-badge--ok' : 'rl-badge--warn']}>
+                                {ok ? 'Disponible' : `${r.available} de ${r.need} hoy`}
+                              </span>
+                            </div>
+                            <div class="rl-stock__bar"><i style={`--w: ${Math.min(100, Math.round((r.available / r.need) * 100))}%`}></i></div>
+                            <p class="rl-stock__meta">
+                              Solicitados {r.need} · En inventario {r.available}
+                              {'incoming' in r && r.incoming ? ` · Por redespliegue ${r.incoming}` : ''}
+                            </p>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <p class="rl-agent-note" style={`--i: ${sc.stock.length + 1}`}>{sc.stockNote}</p>
+                  </div>
+
+                  <!-- 3 Configuración -->
+                  <div class="rl-stagep" data-stage="2">
+                    <p class="rl-stagep__kicker">Configuración recomendada</p>
+                    <ul class="rl-match">
+                      {sc.match.map((m, i) => (
+                        <li style={`--i: ${i + 1}`}>
+                          <span class="rl-match__need">{m.need}</span>
+                          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" aria-hidden="true"><path d="M1 6h17m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          <span class="rl-match__rec">{m.rec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p class="rl-agent-note" style="--i: 4">
+                      La recomendación sale del uso descrito en la solicitud; usted puede ajustarla antes de cotizar.
+                    </p>
+                  </div>
+
+                  <!-- 4 Cotización -->
+                  <div class="rl-stagep" data-stage="3">
+                    <p class="rl-stagep__kicker">Cotización preparada</p>
+                    <div class="rl-doc" style="--i: 1">
+                      <div class="rl-doc__head">
+                        <strong>Cotización · borrador</strong>
+                        <span>{sc.quote.modality} · {sc.quote.term}</span>
+                      </div>
+                      <ul class="rl-doc__lines">
+                        {sc.quote.lines.map((l) => (
+                          <li><span>{l.item}</span><b>× {l.qty}</b></li>
+                        ))}
+                      </ul>
+                      <div class="rl-doc__foot">
+                        <span>Incluye entrega local y soporte técnico</span>
+                        <span>Valores según condiciones comerciales</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5 Aprobación -->
+                  <div class="rl-stagep" data-stage="4">
+                    <p class="rl-stagep__kicker">Revisión y aprobación</p>
+                    <ol class="rl-approve">
+                      <li style="--i: 1"><span class="rl-check" aria-hidden="true"></span><div><strong>Preparada por el agente</strong><span>Inventario reservado, cotización lista</span></div></li>
+                      <li style="--i: 2"><span class="rl-check" aria-hidden="true"></span><div><strong>Revisada por un asesor de ARAR</strong><span>Condiciones comerciales verificadas</span></div></li>
+                      <li style="--i: 3" class="rl-approve__final"><span class="rl-check" aria-hidden="true"></span><div><strong>Aprobada por {sc.approver}</strong><span>Su empresa da la aprobación final</span></div></li>
+                    </ol>
+                    <p class="rl-agent-note" style="--i: 4">Ningún equipo se compromete sin aprobación de una persona.</p>
+                  </div>
+
+                  <!-- 6 Entrega -->
+                  <div class="rl-stagep" data-stage="5">
+                    <p class="rl-stagep__kicker">Seguimiento de la entrega</p>
+                    <ol class="rl-tracker" style="--i: 1">
+                      {trackSteps.map((t, i) => <li style={`--n: ${i}`}><span>{t}</span></li>)}
+                    </ol>
+                    <p class="rl-agent-note rl-agent-note--done" style="--i: 6">
+                      {sc.quote.lines.reduce((n, l) => n + l.qty, 0)} equipos entregados y registrados en inventario con
+                      su responsable.
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div class="outsourcing__feature">
-              <span class="outsourcing__feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              </span>
-              <div>
-                <h4 class="outsourcing__feature-title">Consumibles</h4>
-                <p class="outsourcing__feature-text">Tóner, papel y todos los insumos necesarios, siempre disponibles.</p>
+
+            <div class="rl-window__foot">
+              <div class="rl-window__controls">
+                <button type="button" class="rl-icon-btn" data-demo-toggle aria-label="Pausar la demostración">
+                  <svg class="rl-ico-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="2" width="3" height="10" rx="1" fill="currentColor"/><rect x="8.5" y="2" width="3" height="10" rx="1" fill="currentColor"/></svg>
+                  <svg class="rl-ico-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.3v9.4a.6.6 0 0 0 .9.5l7.6-4.7a.6.6 0 0 0 0-1L4.9 1.8a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>
+                </button>
+                <span class="rl-window__count"><b data-demo-count>1</b> / {demoSteps.length}</span>
               </div>
-            </div>
-            <div class="outsourcing__feature">
-              <span class="outsourcing__feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              </span>
-              <div>
-                <h4 class="outsourcing__feature-title">Mantenimiento</h4>
-                <p class="outsourcing__feature-text">Mantenimiento preventivo y correctivo sin costo adicional.</p>
-              </div>
+              <button type="button" class="rl-btn rl-btn--small rl-btn--outline" data-demo-use>
+                Usar este caso en mi cotización
+              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Requirements Section -->
-    <section class="requirements">
-      <div class="requirements__container">
-        <div class="requirements__content animate-on-scroll">
-          <h2 class="requirements__heading">Documentos requeridos</h2>
-          <p class="requirements__text">Para iniciar el proceso de alquiler, necesitamos los siguientes documentos:</p>
-          <div class="requirements__list">
-            <div class="requirements__item">
-              <span class="requirements__number">1</span>
-              <div>
-                <h4 class="requirements__item-title">Cámara de Comercio</h4>
-                <p class="requirements__item-text">Certificado vigente de existencia y representación legal.</p>
+    <!-- ============================================================
+         5. MODALIDADES
+         ============================================================ -->
+    <section class="rl-section rl-section--white" id="modalidades" aria-labelledby="t-modalidades">
+      <div class="container rl-sticky">
+        <div class="rl-sticky__side">
+          <p class="rl-eyebrow rl-reveal">Modalidades</p>
+          <h2 class="rl-title rl-reveal" id="t-modalidades">
+            Alquiler o arrendamiento:
+            <span class="rl-accent">usted elige el plazo.</span>
+          </h2>
+          <p class="rl-lead rl-reveal">
+            Las dos modalidades incluyen entrega local y soporte técnico. Cambia el horizonte de tiempo y la forma de
+            pago.
+          </p>
+          <p class="rl-note rl-reveal">
+            Plazos, valores y alcance del servicio quedan definidos en su cotización.
+          </p>
+        </div>
+
+        <div class="rl-sticky__main">
+          <div class="rl-plans">
+            {plans.map((p, i) => (
+              <article class="rl-plan rl-reveal" style={`--d: ${i * 90}ms`} data-plan={p.id}>
+                <header class="rl-plan__head">
+                  <p class="rl-plan__tag">{p.tagline}</p>
+                  <h3 class="rl-plan__name">{p.name}</h3>
+                  <p class="rl-plan__summary">{p.summary}</p>
+                </header>
+                {planRows.map((r) => (
+                  <div class="rl-plan__row">
+                    <p class="rl-plan__label">{r.label}</p>
+                    <p class="rl-plan__text">{r[p.id as 'alquiler' | 'arrendamiento']}</p>
+                  </div>
+                ))}
+                <div class="rl-plan__foot">
+                  <button type="button" class="rl-btn rl-btn--outline rl-btn--block" data-plan-select={p.id} aria-pressed="false">
+                    <span class="rl-plan__cta-off">Cotizar {p.name.toLowerCase()}</span>
+                    <span class="rl-plan__cta-on">{p.name} seleccionado</span>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="rl-reqs rl-reveal">
+            <p class="rl-reqs__title">Para empezar necesita tres documentos</p>
+            <ol class="rl-cells rl-cells--3">
+              {requirements.map((r, i) => (
+                <li class="rl-cell rl-req">
+                  <span class="rl-req__num" aria-hidden="true">0{i + 1}</span>
+                  <strong>{r.title}</strong>
+                  <span>{r.text}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. CICLO DE VIDA
+         ============================================================ -->
+    <section class="rl-life" id="ciclo" aria-labelledby="t-ciclo">
+      <div class="container">
+        <div class="rl-head rl-head--split">
+          <div>
+            <p class="rl-eyebrow rl-eyebrow--light rl-reveal">Ciclo de vida</p>
+            <h2 class="rl-title rl-title--light rl-reveal" id="t-ciclo">
+              Cada equipo bajo control,
+              <span class="rl-accent-light">de principio a fin.</span>
+            </h2>
+          </div>
+          <p class="rl-lead rl-lead--light rl-reveal">
+            La plataforma sabe dónde está cada equipo, quién lo tiene y qué sigue. Así un equipo que regresa vuelve a
+            estar disponible para el siguiente cliente.
+          </p>
+        </div>
+
+        <div class="rl-orbit rl-reveal" data-orbit>
+          <svg class="rl-orbit__svg" viewBox="0 0 1000 380" fill="none" aria-hidden="true">
+            <path class="rl-orbit__path" d="M500 40 H790 A150 150 0 0 1 790 340 H210 A150 150 0 0 1 210 40 Z" />
+            <path class="rl-orbit__progress" d="M500 40 H790 A150 150 0 0 1 790 340 H210 A150 150 0 0 1 210 40 Z" pathLength="1" />
+            <circle class="rl-orbit__halo" r="14" cx="500" cy="40" />
+            <circle class="rl-orbit__dot" r="6" cx="500" cy="40" />
+          </svg>
+
+          <div class="rl-orbit__chips" role="group" aria-label="Etapas del ciclo de vida">
+            {lifecycle.map((l, i) => (
+              <button type="button" class:list={['rl-ochip', `rl-ochip--${i}`]} data-life={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+                <span class="rl-ochip__step">Etapa {i + 1}</span>
+                <span class="rl-ochip__name">{l.title}</span>
+              </button>
+            ))}
+          </div>
+
+          <div class="rl-orbit__center" aria-live="polite">
+            <p class="rl-orbit__kicker" data-life-kicker>Etapa 1 de {lifecycle.length}</p>
+            <h3 class="rl-orbit__title" data-life-title>{lifecycle[0].title}</h3>
+            <p class="rl-orbit__text" data-life-text>{lifecycle[0].text}</p>
+          </div>
+        </div>
+
+        <div class="rl-asset rl-reveal">
+          <div class="rl-asset__id">
+            <div class="rl-asset__art"><DeviceArt kind="laptop" /></div>
+            <div>
+              <p class="rl-asset__label">Hoja de vida · ejemplo</p>
+              <p class="rl-asset__name">Portátil · perfil Desarrollo</p>
+            </div>
+          </div>
+          <dl class="rl-asset__fields">
+            <div>
+              <dt>Estado</dt>
+              <dd><span class="rl-badge rl-badge--ok" data-life-status data-tone={lifecycle[0].tone}>{lifecycle[0].status}</span></dd>
+            </div>
+            {lifecycle[0].fields.map(([k, v], i) => (
+              <div><dt>{k}</dt><dd data-life-field={i}>{v}</dd></div>
+            ))}
+          </dl>
+          <p class="rl-asset__log"><span aria-hidden="true"></span><span data-life-log>{lifecycle[0].log}</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. CONVERSIÓN
+         ============================================================ -->
+    <section class="rl-section" id="preguntas" aria-labelledby="t-preguntas">
+      <div class="container rl-sticky">
+        <div class="rl-sticky__side">
+          <p class="rl-eyebrow rl-reveal">Antes de decidir</p>
+          <h2 class="rl-title rl-reveal" id="t-preguntas">
+            Lo que suelen preguntarnos.
+            <span class="rl-accent">Respondido sin rodeos.</span>
+          </h2>
+        </div>
+        <div class="rl-sticky__main rl-faq">
+          {faqs.map((f, i) => (
+            <details class="rl-faq__item rl-reveal" style={`--d: ${i * 50}ms`} open={i === 0}>
+              <summary>{f.q}<span class="rl-faq__icon" aria-hidden="true"></span></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="rl-section rl-section--white rl-quote" id="cotizacion" aria-labelledby="t-cotizacion">
+      <div class="container rl-quote__grid">
+        <div class="rl-quote__side">
+          <p class="rl-eyebrow rl-reveal">Cotización</p>
+          <h2 class="rl-title rl-reveal" id="t-cotizacion">
+            Cuéntenos qué necesita.
+            <span class="rl-accent">Le respondemos con una propuesta.</span>
+          </h2>
+
+          <div class="rl-summary rl-reveal" aria-live="polite">
+            <p class="rl-summary__title">Su selección</p>
+            <ul class="rl-summary__list" data-summary-list></ul>
+            <p class="rl-summary__empty" data-summary-empty>
+              Aún no ha agregado equipos. Puede <a href="#equipos">elegirlos arriba</a> o describir su necesidad en el
+              mensaje.
+            </p>
+            <p class="rl-summary__plan" data-summary-plan hidden></p>
+            <button type="button" class="rl-link" data-summary-clear hidden>Vaciar selección</button>
+          </div>
+
+          <ul class="rl-quote__direct rl-reveal">
+            <li><span>WhatsApp</span><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">{contact.phoneLabel}</a></li>
+            <li><span>Correo</span><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+            <li><span>Horario</span>Lunes a viernes, 9:00 a. m. a 6:00 p. m.</li>
+          </ul>
+        </div>
+
+        <div class="rl-form-wrap rl-reveal">
+          <form class="rl-form" id="rl-quote-form" novalidate>
+            <div class="rl-form__row">
+              <div class="rl-field">
+                <label for="q-nombre">Nombre completo</label>
+                <input id="q-nombre" name="nombre" type="text" autocomplete="name" required />
+                <p class="rl-field__error" hidden>Escriba su nombre.</p>
+              </div>
+              <div class="rl-field">
+                <label for="q-empresa">Empresa</label>
+                <input id="q-empresa" name="empresa" type="text" autocomplete="organization" required />
+                <p class="rl-field__error" hidden>Escriba el nombre de su empresa.</p>
               </div>
             </div>
-            <div class="requirements__item">
-              <span class="requirements__number">2</span>
-              <div>
-                <h4 class="requirements__item-title">RUT</h4>
-                <p class="requirements__item-text">Registro Único Tributario actualizado de la empresa.</p>
+            <div class="rl-form__row">
+              <div class="rl-field">
+                <label for="q-correo">Correo corporativo</label>
+                <input id="q-correo" name="correo" type="email" autocomplete="email" required />
+                <p class="rl-field__error" hidden>Escriba un correo válido, por ejemplo nombre@empresa.com.</p>
+              </div>
+              <div class="rl-field">
+                <label for="q-telefono">Teléfono <span class="rl-optional">opcional</span></label>
+                <input id="q-telefono" name="telefono" type="tel" autocomplete="tel" />
               </div>
             </div>
-            <div class="requirements__item">
-              <span class="requirements__number">3</span>
-              <div>
-                <h4 class="requirements__item-title">Orden de Compra</h4>
-                <p class="requirements__item-text">Orden de compra o solicitud formal del servicio.</p>
+
+            <fieldset class="rl-field rl-seg">
+              <legend>Modalidad</legend>
+              <div class="rl-seg__options">
+                <label><input type="radio" name="modalidad" value="alquiler" /><span>Alquiler</span></label>
+                <label><input type="radio" name="modalidad" value="arrendamiento" /><span>Arrendamiento</span></label>
+                <label><input type="radio" name="modalidad" value="" checked /><span>Por definir</span></label>
               </div>
+            </fieldset>
+
+            <div class="rl-field">
+              <label for="q-plazo">Plazo estimado <span class="rl-optional">opcional</span></label>
+              <input id="q-plazo" name="plazo" type="text" placeholder="Ej.: 3 días, 12 meses" />
             </div>
+
+            <div class="rl-field">
+              <label for="q-mensaje">Mensaje <span class="rl-optional">opcional</span></label>
+              <textarea id="q-mensaje" name="mensaje" rows="3" placeholder="Ciudad de entrega, fecha en que necesita los equipos, configuraciones especiales…"></textarea>
+            </div>
+
+            <button type="submit" class="rl-btn rl-btn--primary rl-btn--block rl-btn--large">
+              Solicitar cotización
+            </button>
+            <p class="rl-form__legal">Usamos sus datos únicamente para responder esta solicitud.</p>
+          </form>
+
+          <div class="rl-sent" data-sent hidden tabindex="-1">
+            <span class="rl-check rl-check--large" aria-hidden="true"></span>
+            <h3 data-sent-title>Su solicitud está lista para enviar</h3>
+            <p data-sent-text>
+              Abrimos un correo con el resumen de su solicitud. Envíelo para que un asesor le responda con la propuesta.
+            </p>
+            <div class="rl-sent__actions" data-sent-actions>
+              <a class="rl-btn rl-btn--primary" data-sent-mail href={`mailto:${contact.email}`}>Abrir el correo otra vez</a>
+              <a class="rl-btn rl-btn--outline" data-sent-wa href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">Enviar por WhatsApp</a>
+            </div>
+            <button type="button" class="rl-link" data-sent-back>Editar la solicitud</button>
           </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Barra de selección persistente -->
+  <div class="rl-bar" data-bar hidden>
+    <p class="rl-bar__text"><b data-bar-count>0</b> <span data-bar-label>equipos en su solicitud</span></p>
+    <a href="#cotizacion" class="rl-btn rl-btn--primary rl-btn--small" data-track="cta_cotizar" data-track-origin="barra">
+      Solicitar cotización
+    </a>
+  </div>
+
+  <script type="application/json" id="rl-data" set:html={JSON.stringify(clientData)} />
+  <script src="../scripts/alquiler.js"></script>
+
   <Footer />
 </Layout>
-
-<style>
-  /* =============================================
-     HERO
-     ============================================= */
-  .hero {
-    position: relative;
-    background: linear-gradient(160deg, var(--color-neutral-950) 0%, var(--color-neutral-900) 60%, var(--color-primary-900) 100%);
-    padding: 140px 0 64px;
-    text-align: center;
-  }
-
-  .hero__container {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .hero .badge {
-    margin-bottom: 20px;
-    background-color: rgba(59, 112, 166, 0.2);
-    color: #8FB2D6;
-  }
-
-  .hero__heading {
-    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.15;
-    margin-bottom: 16px;
-  }
-
-  .hero__subtitle {
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    color: #9EADBB;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  /* =============================================
-     CONTENT
-     ============================================= */
-  .content {
-    padding: 96px 0;
-    background-color: var(--color-bg, #ffffff);
-  }
-
-  .content__container {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .content__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-
-  .content__title {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 20px;
-  }
-
-  .content__text {
-    font-size: 1rem;
-    color: var(--color-text, #3D4F63);
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-
-  .content__text:last-child {
-    margin-bottom: 0;
-  }
-
-  .products__title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 24px;
-  }
-
-  .products__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .products__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 20px 12px;
-    background-color: var(--color-primary-light, #EDF2F8);
-    border-radius: var(--radius, 10px);
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .products__card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow, 0 1px 3px rgba(15, 20, 25, 0.06));
-  }
-
-  .products__icon {
-    color: var(--color-primary-900, #1B344F);
-  }
-
-  .products__label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-dark, #1A2332);
-    line-height: 1.3;
-  }
-
-  /* =============================================
-     BRANDS
-     ============================================= */
-  .brands {
-    padding: 80px 0;
-    background-color: var(--color-bg-alt, #F6F8FA);
-  }
-
-  .brands__container {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 24px;
-    text-align: center;
-  }
-
-  .brands__heading {
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 40px;
-  }
-
-  .brands__grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-  }
-
-  .brands__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 32px;
-    background-color: #ffffff;
-    border-radius: var(--radius, 10px);
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--color-neutral-600, #566A80);
-    box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 20, 25, 0.05));
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-    min-width: 140px;
-  }
-
-  .brands__item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow, 0 1px 3px rgba(15, 20, 25, 0.06));
-  }
-
-  /* =============================================
-     OUTSOURCING
-     ============================================= */
-  .outsourcing {
-    padding: 96px 0;
-    background-color: var(--color-bg, #ffffff);
-  }
-
-  .outsourcing__container {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .outsourcing__heading {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 16px;
-  }
-
-  .outsourcing__text {
-    font-size: 1.05rem;
-    color: var(--color-text, #3D4F63);
-    line-height: 1.7;
-    margin-bottom: 40px;
-    max-width: 700px;
-  }
-
-  .outsourcing__features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-
-  .outsourcing__feature {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .outsourcing__feature-icon {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-primary-light, #EDF2F8);
-    color: var(--color-primary-900, #1B344F);
-    border-radius: var(--radius-sm, 6px);
-  }
-
-  .outsourcing__feature-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 4px;
-  }
-
-  .outsourcing__feature-text {
-    font-size: 0.9rem;
-    color: var(--color-text, #3D4F63);
-    line-height: 1.5;
-  }
-
-  /* =============================================
-     REQUIREMENTS
-     ============================================= */
-  .requirements {
-    padding: 80px 0;
-    background-color: var(--color-bg-alt, #F6F8FA);
-  }
-
-  .requirements__container {
-    max-width: 1160px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .requirements__heading {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 12px;
-  }
-
-  .requirements__text {
-    font-size: 1.05rem;
-    color: var(--color-text, #3D4F63);
-    line-height: 1.6;
-    margin-bottom: 32px;
-  }
-
-  .requirements__list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 600px;
-  }
-
-  .requirements__item {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .requirements__number {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-primary-900, #1B344F);
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: 50%;
-  }
-
-  .requirements__item-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-dark, #1A2332);
-    margin-bottom: 2px;
-  }
-
-  .requirements__item-text {
-    font-size: 0.9rem;
-    color: var(--color-text, #3D4F63);
-    line-height: 1.5;
-  }
-
-  /* =============================================
-     RESPONSIVE
-     ============================================= */
-  @media (max-width: 1024px) {
-    .content__grid {
-      gap: 48px;
-    }
-
-    .outsourcing__features {
-      gap: 24px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding: 120px 0 48px;
-    }
-
-    .content {
-      padding: 64px 0;
-    }
-
-    .content__grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-
-    .products__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .brands {
-      padding: 64px 0;
-    }
-
-    .outsourcing {
-      padding: 64px 0;
-    }
-
-    .outsourcing__features {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .requirements {
-      padding: 64px 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero {
-      padding: 108px 0 40px;
-    }
-
-    .hero__heading {
-      font-size: 1.6rem;
-    }
-
-    .content {
-      padding: 48px 0;
-    }
-
-    .products__grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .brands {
-      padding: 48px 0;
-    }
-
-    .brands__grid {
-      gap: 12px;
-    }
-
-    .brands__item {
-      min-width: auto;
-      padding: 12px 20px;
-      font-size: 0.9rem;
-    }
-
-    .outsourcing {
-      padding: 48px 0;
-    }
-
-    .requirements {
-      padding: 48px 0;
-    }
-  }
-</style>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const animElements = document.querySelectorAll('.animate-on-scroll');
-
-  animElements.forEach((el) => {
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
-      }
-    );
-  });
-</script>
