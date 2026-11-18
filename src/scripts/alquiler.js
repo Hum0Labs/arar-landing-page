@@ -7,8 +7,10 @@
  *  4. Ciclo de vida
  *  5. Formulario de cotización
  *
- * Sin dependencias: solo APIs del navegador.
+ * Única dependencia: Lenis, para el desplazamiento suave.
  */
+
+import Lenis from 'lenis';
 
 const root = document.querySelector('.rl');
 const dataEl = document.getElementById('rl-data');
@@ -30,9 +32,63 @@ if (root && dataEl) {
   });
 
   /* ------------------------------------------------------------------ */
+  /* 0. Desplazamiento suave (Lenis)                                     */
+  /* ------------------------------------------------------------------ */
+  // Lenis ya respeta el scroll-padding-top del documento (cabecera fija).
+  const HEADER_OFFSET = 0;
+  let lenis = null;
+  if (!reduceMotion) {
+    lenis = new Lenis({
+      autoRaf: true,
+      lerp: 0.1,
+      wheelMultiplier: 1,
+      anchors: { offset: HEADER_OFFSET },
+    });
+    // El menú móvil bloquea el scroll del body: Lenis debe detenerse con él.
+    const hamburger = document.getElementById('hamburger-btn');
+    if (hamburger) {
+      new MutationObserver(() => {
+        if (hamburger.getAttribute('aria-expanded') === 'true') lenis.stop();
+        else lenis.start();
+      }).observe(hamburger, { attributes: true, attributeFilter: ['aria-expanded'] });
+    }
+  }
+
+  const scrollToEl = (target) => {
+    if (lenis) lenis.scrollTo(target, { offset: HEADER_OFFSET });
+    else target.scrollIntoView({ behavior: 'auto', block: 'start' });
+  };
+
+  /* ------------------------------------------------------------------ */
   /* 1. Aparición y paralaje                                             */
   /* ------------------------------------------------------------------ */
-  const reveals = $$('.rl-reveal');
+
+  // Títulos: cada palabra entra del desenfoque al foco.
+  const splitWords = (el) => {
+    let n = 0;
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.ELEMENT_NODE) return walk(child);
+        if (child.nodeType !== Node.TEXT_NODE) return;
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.append(' ');
+          const word = document.createElement('span');
+          word.className = 'rl-w';
+          word.style.setProperty('--w', n++);
+          word.textContent = part;
+          frag.append(word);
+        });
+        child.replaceWith(frag);
+      });
+    };
+    walk(el);
+    el.classList.add('is-split');
+  };
+  $$('.rl-words').forEach(splitWords);
+
+  const reveals = $$('.rl-reveal, .rl-words, .rl-scan');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     reveals.forEach((el) => el.classList.add('is-in'));
   } else {
@@ -207,9 +263,7 @@ if (root && dataEl) {
     });
   });
 
-  const goToQuote = () => {
-    $('#cotizacion').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-  };
+  const goToQuote = () => scrollToEl($('#cotizacion'));
 
   $$('[data-plan-select]').forEach((btn) => {
     btn.addEventListener('click', () => {

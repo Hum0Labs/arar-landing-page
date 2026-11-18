@@ -66,6 +66,122 @@
   transform: none;
 }
 
+/* Títulos: aparición palabra por palabra, del desenfoque al foco.
+   Los párrafos no se animan: siempre son legibles. */
+.rl-js .rl-words:not(.is-split) {
+  opacity: 0;
+}
+
+.rl-w {
+  display: inline-block;
+}
+
+.rl-js .rl-words .rl-w {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(0.28em);
+  transition:
+    opacity 0.75s var(--rl-ease),
+    filter 0.75s var(--rl-ease),
+    transform 0.75s var(--rl-ease);
+  transition-delay: calc(var(--w, 0) * 60ms);
+  will-change: opacity, filter, transform;
+}
+
+.rl-js .rl-words.is-in .rl-w {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+/* Imagen: barrido de escaneo. Una línea de luz recorre el equipo y lo
+   revela sobre una retícula técnica que se desvanece. */
+.rl-scan {
+  position: relative;
+}
+
+.rl-scan::before,
+.rl-scan::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.rl-scan::before {
+  inset: 6% 2% 12%;
+  border: 1px dashed rgba(59, 112, 166, 0.55);
+  border-radius: 8px;
+  background:
+    linear-gradient(to right, rgba(59, 112, 166, 0.22) 1px, transparent 1px) 0 0 / 14px 14px,
+    linear-gradient(to bottom, rgba(59, 112, 166, 0.22) 1px, transparent 1px) 0 0 / 14px 14px;
+}
+
+.rl-scan::after {
+  top: 0;
+  bottom: 6%;
+  left: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: linear-gradient(to bottom, transparent, var(--rl-accent) 18%, #8fb2d6 50%, var(--rl-accent) 82%, transparent);
+  box-shadow:
+    0 0 14px 3px rgba(59, 112, 166, 0.5),
+    -18px 0 28px 6px rgba(143, 178, 214, 0.22);
+}
+
+.rl-js .rl-scan .device-art {
+  clip-path: inset(0 100% 0 0);
+}
+
+.rl-js .rl-scan.is-in .device-art {
+  animation: rl-scan-image 1.25s cubic-bezier(0.65, 0, 0.2, 1) var(--d, 0ms) both;
+}
+
+.rl-js .rl-scan.is-in::after {
+  animation: rl-scan-line 1.25s cubic-bezier(0.65, 0, 0.2, 1) var(--d, 0ms) both;
+}
+
+.rl-js .rl-scan.is-in::before {
+  animation: rl-scan-grid 1.5s ease var(--d, 0ms) both;
+}
+
+@keyframes rl-scan-image {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes rl-scan-line {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  8%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes rl-scan-grid {
+  0% {
+    opacity: 0;
+  }
+  20%,
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Piezas compartidas
    -------------------------------------------------------------------------- */
@@ -353,8 +469,29 @@
    ========================================================================== */
 .rl-hero {
   position: relative;
-  padding: clamp(124px, 11.5vw, 164px) 0 clamp(40px, 6vw, 72px);
+  padding: clamp(124px, 11.5vw, 164px) 0 clamp(40px, 5vw, 64px);
   overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(59, 112, 166, 0.13), transparent 70%),
+    linear-gradient(180deg, #edf2f8 0%, var(--rl-bg) 78%);
+}
+
+/* El hero se disuelve en la sección siguiente: sin línea divisoria y con un
+   velo que apaga la retícula y las tarjetas hacia el borde inferior. */
+.rl-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(120px, 16vw, 220px);
+  background: linear-gradient(to bottom, rgba(247, 248, 250, 0), var(--rl-bg) 88%);
+  pointer-events: none;
+}
+
+.rl-hero + .rl-section {
+  border-top: 0;
+  padding-top: clamp(32px, 5vw, 72px);
 }
 
 .rl-hero__grid {
@@ -365,8 +502,8 @@
     linear-gradient(to bottom, rgba(16, 35, 58, 0.055) 1px, transparent 1px);
   background-size: 72px 72px;
   background-position: center top;
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 20%, transparent 78%);
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 62% at 50% 38%, #000 20%, transparent 76%);
+  mask-image: radial-gradient(ellipse 75% 62% at 50% 38%, #000 20%, transparent 76%);
   pointer-events: none;
 }
 
@@ -633,6 +770,8 @@
 }
 
 .rl-stage__caption {
+  position: relative;
+  z-index: 1;
   margin: 8px 0 0;
   text-align: center;
   font-size: 0.75rem;
@@ -3086,6 +3225,24 @@
   .rl-js .rl-reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .rl-js .rl-words,
+  .rl-js .rl-words .rl-w {
+    opacity: 1 !important;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .rl-js .rl-scan .device-art {
+    clip-path: none;
+    animation: none !important;
+  }
+
+  .rl-scan::before,
+  .rl-scan::after {
+    display: none;
   }
 
   .rl-stage__links path,

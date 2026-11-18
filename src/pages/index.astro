@@ -48,15 +48,15 @@ const clientData = {
     <section class="rl-hero">
       <div class="rl-hero__grid" aria-hidden="true"></div>
       <div class="container rl-hero__inner">
-        <p class="rl-pill rl-reveal">
+        <p class="rl-pill">
           <span class="rl-pill__dot" aria-hidden="true"></span>
           Alquiler y arrendamiento de equipos IT · Desde 2003
         </p>
-        <h1 class="rl-hero__title rl-reveal" style="--d: 60ms">
+        <h1 class="rl-hero__title rl-words">
           Tecnología para su empresa,
           <span class="rl-accent">sin comprarla.</span>
         </h1>
-        <p class="rl-hero__sub rl-reveal" style="--d: 120ms">
+        <p class="rl-hero__sub">
           Alquilamos y arrendamos portátiles, equipos de escritorio, monitores, servidores e impresión a empresas en
           Colombia, con entrega local y soporte técnico incluido. Nuestra plataforma lleva el control de cada equipo,
           de la solicitud a la devolución.
@@ -82,7 +82,7 @@ const clientData = {
           </svg>
 
           <div class="rl-stage__device" data-depth="0.02">
-            <DeviceArt kind="laptop" />
+            <div class="rl-scan" style="--d: 350ms"><DeviceArt kind="laptop" /></div>
           </div>
 
           <div class="rl-float rl-float--a" data-depth="0.07">
@@ -135,8 +135,8 @@ const clientData = {
     <section class="rl-section rl-trust" id="confianza" aria-labelledby="t-confianza">
       <div class="container">
         <div class="rl-head">
-          <p class="rl-eyebrow rl-reveal">Respaldo</p>
-          <h2 class="rl-title rl-reveal" id="t-confianza">
+          <p class="rl-eyebrow">Respaldo</p>
+          <h2 class="rl-title rl-words" id="t-confianza">
             Más de veinte años equipando empresas.
             <span class="rl-accent">Con soporte incluido.</span>
           </h2>
@@ -213,13 +213,13 @@ const clientData = {
       <div class="container">
         <div class="rl-head rl-head--split">
           <div>
-            <p class="rl-eyebrow rl-reveal">Equipos</p>
-            <h2 class="rl-title rl-reveal" id="t-equipos">
+            <p class="rl-eyebrow">Equipos</p>
+            <h2 class="rl-title rl-words" id="t-equipos">
               Arme su solicitud.
               <span class="rl-accent">Nosotros la cotizamos.</span>
             </h2>
           </div>
-          <p class="rl-lead rl-reveal">
+          <p class="rl-lead">
             Elija el tipo de equipo, el perfil de uso y la cantidad. Su selección viaja con usted hasta el formulario
             de cotización.
           </p>
@@ -229,7 +229,7 @@ const clientData = {
           {equipment.map((e, i) => (
             <article class="rl-eq rl-reveal" style={`--d: ${(i % 3) * 80}ms`} data-eq={e.id}>
               <div class="rl-eq__art">
-                <DeviceArt kind={e.art} />
+                <div class="rl-scan" style={`--d: ${(i % 3) * 120}ms`}><DeviceArt kind={e.art} /></div>
                 <span class="rl-eq__tag" aria-hidden="true">En su cotización</span>
               </div>
               <div class="rl-eq__body">
@@ -266,7 +266,7 @@ const clientData = {
             </article>
           ))}
         </div>
-        <p class="rl-note rl-reveal">
+        <p class="rl-note">
           Marcas, modelos y configuraciones se confirman según disponibilidad en su cotización.
         </p>
       </div>
@@ -279,13 +279,13 @@ const clientData = {
       <div class="container">
         <div class="rl-head rl-head--split">
           <div>
-            <p class="rl-eyebrow rl-reveal">La plataforma</p>
-            <h2 class="rl-title rl-reveal" id="t-plataforma">
+            <p class="rl-eyebrow">La plataforma</p>
+            <h2 class="rl-title rl-words" id="t-plataforma">
               De una solicitud a equipos entregados,
               <span class="rl-accent">paso a paso.</span>
             </h2>
           </div>
-          <p class="rl-lead rl-reveal">
+          <p class="rl-lead">
             Un agente toma su solicitud, consulta el inventario y prepara la cotización. Una persona aprueba antes de
             comprometer equipos. Elija un caso y véalo avanzar.
           </p>
@@ -449,16 +449,16 @@ const clientData = {
     <section class="rl-section rl-section--white" id="modalidades" aria-labelledby="t-modalidades">
       <div class="container rl-sticky">
         <div class="rl-sticky__side">
-          <p class="rl-eyebrow rl-reveal">Modalidades</p>
-          <h2 class="rl-title rl-reveal" id="t-modalidades">
+          <p class="rl-eyebrow">Modalidades</p>
+          <h2 class="rl-title rl-words" id="t-modalidades">
             Alquiler o arrendamiento:
             <span class="rl-accent">usted elige el plazo.</span>
           </h2>
-          <p class="rl-lead rl-reveal">
+          <p class="rl-lead">
             Las dos modalidades incluyen entrega local y soporte técnico. Cambia el horizonte de tiempo y la forma de
             pago.
           </p>
-          <p class="rl-note rl-reveal">
+          <p class="rl-note">
             Plazos, valores y alcance del servicio quedan definidos en su cotización.
           </p>
         </div>
@@ -511,13 +511,13 @@ const clientData = {
       <div class="container">
         <div class="rl-head rl-head--split">
           <div>
-            <p class="rl-eyebrow rl-eyebrow--light rl-reveal">Ciclo de vida</p>
-            <h2 class="rl-title rl-title--light rl-reveal" id="t-ciclo">
+            <p class="rl-eyebrow rl-eyebrow--light">Ciclo de vida</p>
+            <h2 class="rl-title rl-title--light rl-words" id="t-ciclo">
               Cada equipo bajo control,
               <span class="rl-accent-light">de principio a fin.</span>
             </h2>
           </div>
-          <p class="rl-lead rl-lead--light rl-reveal">
+          <p class="rl-lead rl-lead--light">
             La plataforma sabe dónde está cada equipo, quién lo tiene y qué sigue. Así un equipo que regresa vuelve a
             estar disponible para el siguiente cliente.
           </p>
@@ -576,13 +576,13 @@ const clientData = {
       <div class="container">
         <div class="rl-head rl-head--split">
           <div>
-            <p class="rl-eyebrow rl-reveal">Portafolio</p>
-            <h2 class="rl-title rl-reveal" id="t-portafolio">
+            <p class="rl-eyebrow">Portafolio</p>
+            <h2 class="rl-title rl-words" id="t-portafolio">
               Más allá de los equipos.
               <span class="rl-accent">El software que mueve su empresa.</span>
             </h2>
           </div>
-          <p class="rl-lead rl-reveal">
+          <p class="rl-lead">
             ARAR es un grupo tecnológico. Además del alquiler de equipos, acompañamos a las empresas con consultoría
             SAP y con un ERP propio.
           </p>
@@ -620,8 +620,8 @@ const clientData = {
     <section class="rl-section" id="preguntas" aria-labelledby="t-preguntas">
       <div class="container rl-sticky">
         <div class="rl-sticky__side">
-          <p class="rl-eyebrow rl-reveal">Antes de decidir</p>
-          <h2 class="rl-title rl-reveal" id="t-preguntas">
+          <p class="rl-eyebrow">Antes de decidir</p>
+          <h2 class="rl-title rl-words" id="t-preguntas">
             Lo que suelen preguntarnos.
             <span class="rl-accent">Respondido sin rodeos.</span>
           </h2>
@@ -640,8 +640,8 @@ const clientData = {
     <section class="rl-section rl-section--white rl-quote" id="cotizacion" aria-labelledby="t-cotizacion">
       <div class="container rl-quote__grid">
         <div class="rl-quote__side">
-          <p class="rl-eyebrow rl-reveal">Cotización</p>
-          <h2 class="rl-title rl-reveal" id="t-cotizacion">
+          <p class="rl-eyebrow">Cotización</p>
+          <h2 class="rl-title rl-words" id="t-cotizacion">
             Cuéntenos qué necesita.
             <span class="rl-accent">Le respondemos con una propuesta.</span>
           </h2>
@@ -706,7 +706,7 @@ const clientData = {
 
             <div class="rl-field">
               <label for="q-mensaje">Mensaje <span class="rl-optional">opcional</span></label>
-              <textarea id="q-mensaje" name="mensaje" rows="3" placeholder="Ciudad de entrega, fecha en que necesita los equipos, configuraciones especiales…"></textarea>
+              <textarea data-lenis-prevent id="q-mensaje" name="mensaje" rows="3" placeholder="Ciudad de entrega, fecha en que necesita los equipos, configuraciones especiales…"></textarea>
             </div>
 
             <button type="submit" class="rl-btn rl-btn--primary rl-btn--block rl-btn--large">
