@@ -6,6 +6,9 @@ export default defineConfig({
   site: 'https://www.arar.com.co',
   base: '/',
   output: 'static',
+  redirects: {
+    '/alquiler': '/',
+  },
   build: {
     assets: 'assets',
   },

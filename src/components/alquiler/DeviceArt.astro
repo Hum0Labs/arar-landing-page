@@ -1,0 +1,152 @@
+---
+/**
+ * Ilustraciones originales de hardware, todas con la misma luz, paleta y
+ * vista frontal. Son un sustituto coherente hasta contar con fotografía de
+ * producto aprobada: para reemplazarlas, cambie este componente por <img>.
+ */
+interface Props {
+  kind: 'laptop' | 'desktop' | 'monitor' | 'server' | 'printer' | 'accessories';
+  class?: string;
+}
+const { kind, class: className } = Astro.props;
+const uid = `da-${kind}-${Math.random().toString(36).slice(2, 7)}`;
+---
+
+<svg class:list={['device-art', className]} viewBox="0 0 240 160" fill="none" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={`${uid}-metal`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4F6F9" />
+      <stop offset="1" stop-color="#CFD6DE" />
+    </linearGradient>
+    <linearGradient id={`${uid}-dark`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A3647" />
+      <stop offset="1" stop-color="#141B26" />
+    </linearGradient>
+    <linearGradient id={`${uid}-screen`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#24476A" />
+      <stop offset="0.55" stop-color="#3B70A6" />
+      <stop offset="1" stop-color="#8FB2D6" />
+    </linearGradient>
+    <radialGradient id={`${uid}-shadow`} cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#0F1419" stop-opacity="0.22" />
+      <stop offset="1" stop-color="#0F1419" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="142" rx="92" ry="9" fill={`url(#${uid}-shadow)`} />
+
+  {kind === 'laptop' && (
+    <g>
+      <rect x="52" y="24" width="136" height="92" rx="8" fill={`url(#${uid}-dark)`} />
+      <rect x="57" y="29" width="126" height="80" rx="3" fill={`url(#${uid}-screen)`} />
+      <path d="M57 86 Q100 58 183 74 V106 a3 3 0 0 1 -3 3 H60 a3 3 0 0 1 -3 -3 Z" fill="#fff" fill-opacity="0.12" />
+      <circle cx="120" cy="26.5" r="1" fill="#566A80" />
+      <path d="M28 116 H212 L205 127 a5 5 0 0 1 -4 2 H39 a5 5 0 0 1 -4 -2 Z" fill={`url(#${uid}-metal)`} />
+      <path d="M28 116 H212 V118 H28 Z" fill="#fff" fill-opacity="0.7" />
+      <rect x="102" y="116" width="36" height="3.5" rx="1.75" fill="#BFC9D2" />
+    </g>
+  )}
+
+  {kind === 'desktop' && (
+    <g>
+      <rect x="34" y="34" width="118" height="78" rx="6" fill={`url(#${uid}-dark)`} />
+      <rect x="39" y="39" width="108" height="64" rx="2.5" fill={`url(#${uid}-screen)`} />
+      <path d="M39 84 Q80 62 147 72 V100 a3 3 0 0 1 -3 3 H42 a3 3 0 0 1 -3 -3 Z" fill="#fff" fill-opacity="0.12" />
+      <path d="M84 112 H102 L105 130 H81 Z" fill={`url(#${uid}-metal)`} />
+      <rect x="66" y="129" width="54" height="5" rx="2.5" fill={`url(#${uid}-metal)`} />
+      <rect x="164" y="30" width="46" height="104" rx="6" fill={`url(#${uid}-metal)`} />
+      <rect x="164" y="30" width="46" height="2" rx="1" fill="#fff" fill-opacity="0.8" />
+      <rect x="172" y="42" width="30" height="3" rx="1.5" fill="#9EADBB" />
+      <rect x="172" y="50" width="30" height="3" rx="1.5" fill="#BFC9D2" />
+      <circle cx="187" cy="72" r="5" fill="#EEF1F5" stroke="#9EADBB" stroke-width="1.2" />
+      <circle cx="187" cy="72" r="1.6" fill="#3B70A6" />
+      <g stroke="#BFC9D2" stroke-width="1.5" stroke-linecap="round">
+        <path d="M174 104 H200 M174 110 H200 M174 116 H200 M174 122 H200" />
+      </g>
+    </g>
+  )}
+
+  {kind === 'monitor' && (
+    <g>
+      <rect x="36" y="20" width="168" height="98" rx="7" fill={`url(#${uid}-dark)`} />
+      <rect x="41" y="25" width="158" height="84" rx="3" fill={`url(#${uid}-screen)`} />
+      <path d="M41 84 Q104 52 199 70 V106 a3 3 0 0 1 -3 3 H44 a3 3 0 0 1 -3 -3 Z" fill="#fff" fill-opacity="0.12" />
+      <circle cx="120" cy="113.5" r="1.2" fill="#566A80" />
+      <path d="M110 118 H130 L133 134 H107 Z" fill={`url(#${uid}-metal)`} />
+      <rect x="84" y="133" width="72" height="5" rx="2.5" fill={`url(#${uid}-metal)`} />
+    </g>
+  )}
+
+  {kind === 'server' && (
+    <g>
+      <rect x="40" y="22" width="160" height="116" rx="7" fill={`url(#${uid}-dark)`} />
+      {[0, 1, 2].map((i) => (
+        <g transform={`translate(0 ${i * 36})`}>
+          <rect x="48" y="30" width="144" height="28" rx="4" fill={`url(#${uid}-metal)`} />
+          <rect x="48" y="30" width="144" height="1.6" rx="0.8" fill="#fff" fill-opacity="0.85" />
+          <circle cx="60" cy="44" r="3" fill={i === 1 ? '#8FB2D6' : '#3B70A6'} />
+          <circle cx="70" cy="44" r="3" fill="#BFC9D2" />
+          <g stroke="#9EADBB" stroke-width="1.6" stroke-linecap="round">
+            <path d="M86 39 V49 M92 39 V49 M98 39 V49 M104 39 V49 M110 39 V49 M116 39 V49 M122 39 V49 M128 39 V49" />
+          </g>
+          <rect x="140" y="38" width="44" height="12" rx="2" fill="#DDE3E9" />
+          <rect x="144" y="42" width="20" height="4" rx="2" fill="#9EADBB" />
+        </g>
+      ))}
+    </g>
+  )}
+
+  {kind === 'printer' && (
+    <g>
+      <path d="M78 22 H162 a4 4 0 0 1 4 4 V62 H74 V26 a4 4 0 0 1 4 -4 Z" fill="#fff" stroke="#DDE3E9" stroke-width="1.5" />
+      <g stroke="#DDE3E9" stroke-width="2" stroke-linecap="round">
+        <path d="M88 34 H152 M88 42 H140 M88 50 H146" />
+      </g>
+      <rect x="40" y="58" width="160" height="58" rx="9" fill={`url(#${uid}-metal)`} />
+      <rect x="40" y="58" width="160" height="2" rx="1" fill="#fff" fill-opacity="0.85" />
+      <rect x="56" y="70" width="46" height="18" rx="3" fill={`url(#${uid}-dark)`} />
+      <rect x="60" y="74" width="24" height="3" rx="1.5" fill="#8FB2D6" />
+      <rect x="60" y="80" width="16" height="3" rx="1.5" fill="#566A80" />
+      <circle cx="170" cy="79" r="5" fill="#3B70A6" />
+      <circle cx="184" cy="79" r="3" fill="#BFC9D2" />
+      <rect x="62" y="100" width="116" height="8" rx="4" fill={`url(#${uid}-dark)`} />
+      <path d="M70 104 H170 L176 134 a3 3 0 0 1 -3 4 H67 a3 3 0 0 1 -3 -4 Z" fill="#fff" stroke="#DDE3E9" stroke-width="1.5" />
+      <g stroke="#B8D0E6" stroke-width="2" stroke-linecap="round">
+        <path d="M80 116 H160 M79 124 H148" />
+      </g>
+    </g>
+  )}
+
+  {kind === 'accessories' && (
+    <g>
+      <rect x="30" y="40" width="118" height="62" rx="10" fill={`url(#${uid}-metal)`} />
+      <rect x="30" y="40" width="118" height="2" rx="1" fill="#fff" fill-opacity="0.85" />
+      <circle cx="68" cy="71" r="21" fill={`url(#${uid}-dark)`} />
+      <circle cx="68" cy="71" r="14" fill={`url(#${uid}-screen)`} />
+      <circle cx="62" cy="65" r="4" fill="#fff" fill-opacity="0.35" />
+      <g stroke="#9EADBB" stroke-width="1.8" stroke-linecap="round">
+        <path d="M104 56 H136 M104 64 H136 M104 72 H136" />
+      </g>
+      <circle cx="110" cy="88" r="3" fill="#3B70A6" />
+      <circle cx="121" cy="88" r="3" fill="#BFC9D2" />
+      <rect x="44" y="102" width="12" height="6" rx="2" fill="#9EADBB" />
+      <rect x="122" y="102" width="12" height="6" rx="2" fill="#9EADBB" />
+      <rect x="92" y="114" width="92" height="24" rx="5" fill={`url(#${uid}-metal)`} />
+      <g fill="#9EADBB">
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <rect x={98 + i * 10} y="119" width="7" height="5" rx="1.2" />)}
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <rect x={98 + i * 10} y="127" width="7" height="5" rx="1.2" />)}
+      </g>
+      <rect x="192" y="104" width="22" height="34" rx="11" fill={`url(#${uid}-metal)`} />
+      <path d="M203 104 V118" stroke="#9EADBB" stroke-width="1.5" />
+      <rect x="201" y="109" width="4" height="7" rx="2" fill="#3B70A6" />
+    </g>
+  )}
+</svg>
+
+<style>
+  .device-art {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

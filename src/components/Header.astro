@@ -1,18 +1,18 @@
 ---
 const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { label: 'Soluciones', href: `${base}#soluciones` },
-  { label: 'SAP', href: `${base}sap` },
-  { label: 'Alquiler IT', href: `${base}alquiler` },
-  { label: 'IA', href: `${base}ia` },
-  { label: '1nativoone', href: `${base}1nativoone` },
+  { label: 'Equipos', href: `${base}#equipos` },
+  { label: 'Plataforma', href: `${base}#plataforma` },
+  { label: 'Modalidades', href: `${base}#modalidades` },
+  { label: 'Ciclo de vida', href: `${base}#ciclo` },
+  { label: 'Portafolio', href: `${base}#portafolio` },
 ];
 ---
 
 <header class="header" id="main-header">
   <div class="header__inner">
     <a href={base} class="header__logo">
-      <span class="header__logo-text">ARAR</span>
+      <span class="header__logo-text">arar</span>
     </a>
 
     <nav class="header__nav" id="main-nav">
@@ -23,10 +23,10 @@ const navLinks = [
           </li>
         ))}
       </ul>
-      <a href={`${base}#contacto`} class="header__cta header__cta--mobile">Contacto</a>
+      <a href={`${base}#cotizacion`} class="header__cta header__cta--mobile">Cotizar</a>
     </nav>
 
-    <a href={`${base}#contacto`} class="header__cta header__cta--desktop">Contacto</a>
+    <a href={`${base}#cotizacion`} class="header__cta header__cta--desktop">Cotizar</a>
 
     <button
       class="header__hamburger"
@@ -130,11 +130,11 @@ const navLinks = [
 
   .header__logo-text {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: var(--color-primary-900, #1B344F);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 1;
     margin-left: 8px;
   }
 
