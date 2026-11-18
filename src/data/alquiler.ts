@@ -10,7 +10,6 @@
 export const contact = {
   email: 'arar@arar.com.co',
   whatsapp: '573102961407',
-  phoneLabel: '+57 310 296 1407',
   /**
    * Etapa 3: URL que recibe la cotización por POST (JSON). Mientras esté
    * vacía, el formulario abre un correo y ofrece WhatsApp con el resumen.
