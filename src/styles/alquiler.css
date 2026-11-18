@@ -2148,6 +2148,145 @@
 }
 
 /* ==========================================================================
+   PORTAFOLIO DEL GRUPO
+   ========================================================================== */
+.rl-section--flush {
+  border-top: 0;
+}
+
+.rl-port {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.rl-port__card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius);
+  background: var(--rl-surface);
+  color: inherit;
+  overflow: hidden;
+  transition:
+    opacity 0.7s var(--rl-ease) var(--d, 0ms),
+    transform 0.7s var(--rl-ease) var(--d, 0ms),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.rl-port__card:hover {
+  color: inherit;
+  text-decoration: none;
+  border-color: var(--rl-accent);
+  box-shadow: var(--rl-shadow-lg);
+}
+
+.rl-port__visual {
+  display: grid;
+  place-items: center;
+  padding: clamp(28px, 4vw, 48px);
+  background:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px) center / 48px 48px,
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px) center / 48px 48px,
+    radial-gradient(ellipse 70% 80% at 50% 100%, rgba(59, 112, 166, 0.45), transparent 70%),
+    var(--rl-deep);
+}
+
+.rl-port__panel {
+  width: min(100%, 340px);
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.6s var(--rl-ease);
+}
+
+.rl-port__card:hover .rl-port__panel {
+  transform: translateY(-8px);
+}
+
+.rl-port__panel-title {
+  margin: 0 0 12px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rl-muted);
+}
+
+.rl-port__panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--rl-ink);
+}
+
+.rl-port__panel li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rl-port__panel .rl-check {
+  width: 18px;
+  height: 18px;
+}
+
+.rl-port__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 28px;
+}
+
+.rl-port__kicker {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rl-accent-ink);
+}
+
+.rl-port__name {
+  margin-bottom: 10px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--rl-ink);
+}
+
+.rl-port__text {
+  margin: 0 0 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--rl-muted);
+}
+
+.rl-port__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--rl-accent-ink);
+}
+
+.rl-port__cta svg {
+  transition: transform 0.25s var(--rl-ease);
+}
+
+.rl-port__card:hover .rl-port__cta svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
    7. PREGUNTAS + COTIZACIÓN
    ========================================================================== */
 .rl-faq__item {
@@ -2821,7 +2960,8 @@
   }
 
   .rl-caps,
-  .rl-eq-grid {
+  .rl-eq-grid,
+  .rl-port {
     grid-template-columns: minmax(0, 1fr);
   }
 

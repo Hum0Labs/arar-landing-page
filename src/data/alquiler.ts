@@ -417,3 +417,30 @@ export const faqs = [
     a: 'Hacemos entrega local desde nuestra sede en Bogotá. Si su operación está en otra ciudad, indíquelo en la solicitud y le confirmamos la cobertura.',
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Portafolio del grupo (texto tomado de las páginas /sap y /1nativoone) */
+/* ------------------------------------------------------------------ */
+
+export const portfolio = [
+  {
+    id: 'sap',
+    href: 'sap',
+    kicker: 'Consultoría',
+    name: 'Consultoría SAP',
+    text: 'Implementamos, personalizamos y optimizamos su sistema SAP. No reemplazamos: maximizamos lo que ya tiene.',
+    panelTitle: 'Capacidades',
+    panel: ['Implementación de módulos SAP', 'Desarrollo ABAP a medida', 'Reportes y dashboards', 'Soporte y mantenimiento'],
+    cta: 'Conocer la consultoría SAP',
+  },
+  {
+    id: '1nativoone',
+    href: '1nativoone',
+    kicker: 'ERP propio',
+    name: '1nativoone ERP',
+    text: 'El ERP empresarial que desarrolla nuestra subsidiaria, construido desde cero con tecnologías actuales para empresas latinoamericanas.',
+    panelTitle: 'Ficha técnica',
+    panel: ['Plataforma · ASP.NET', 'Arquitectura · Microservicios', 'Diseño · Orientado a aspectos', 'Áreas funcionales modulares'],
+    cta: 'Conocer 1nativoone',
+  },
+];
