@@ -11,10 +11,13 @@ export const contact = {
   email: 'arar@arar.com.co',
   whatsapp: '573102961407',
   /**
-   * Etapa 3: URL que recibe la cotización por POST (JSON). Mientras esté
-   * vacía, el formulario abre un correo y ofrece WhatsApp con el resumen.
+   * Servicio que recibe la cotización por POST (JSON) y la reenvía por correo:
+   * Web3Forms. La clave de acceso es pública por diseño; el destinatario se
+   * configura en el panel de Web3Forms. Si el servicio falla, el formulario
+   * abre un correo y ofrece WhatsApp con el resumen.
    */
-  quoteEndpoint: '',
+  quoteEndpoint: 'https://api.web3forms.com/submit',
+  quoteAccessKey: '012abd57-825a-4919-bde7-12578fe87e8d',
 };
 
 /* ------------------------------------------------------------------ */

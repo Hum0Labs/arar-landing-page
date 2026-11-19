@@ -632,12 +632,31 @@ if (root && dataEl) {
         const button = $('button[type="submit"]', form);
         button.disabled = true;
         try {
+          /* FormData sin cabeceras propias: es una petición CORS simple, sin
+             preflight, que es lo que Web3Forms acepta desde el navegador. */
+          const payload = new FormData();
+          Object.entries({
+            access_key: data.contact.quoteAccessKey,
+            subject,
+            from_name: 'Sitio web ARAR',
+            /* name y email: Web3Forms los usa como remitente y dirección de respuesta */
+            name: values.nombre,
+            email: values.correo,
+            empresa: values.empresa,
+            telefono: values.telefono,
+            modalidad: planNames[state.modality] || 'Por definir',
+            plazo: values.plazo,
+            equipos: String(totalUnits()),
+            message: summary,
+            botcheck: values.botcheck || '',
+          }).forEach(([key, value]) => payload.append(key, value));
           const response = await fetch(data.contact.quoteEndpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ ...values, modalidad: state.modality, equipos: state.items, resumen: summary }),
+            headers: { Accept: 'application/json' },
+            body: payload,
           });
-          if (!response.ok) throw new Error(String(response.status));
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || result.success !== true) throw new Error(String(response.status));
           showSent({
             title: 'Recibimos su solicitud',
             text: 'Un asesor de ARAR le responderá con la propuesta al correo que nos indicó.',
