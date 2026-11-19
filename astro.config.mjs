@@ -8,6 +8,9 @@ export default defineConfig({
   output: 'static',
   redirects: {
     '/alquiler': '/',
+    // Páginas retiradas: su contenido vive en la sección Portafolio del inicio.
+    '/sap': '/#portafolio',
+    '/1nativoone': '/#portafolio',
   },
   build: {
     assets: 'assets',

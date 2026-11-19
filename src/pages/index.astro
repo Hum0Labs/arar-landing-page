@@ -590,7 +590,7 @@ const clientData = {
 
         <div class="rl-port">
           {portfolio.map((item, i) => (
-            <a class="rl-port__card rl-reveal" style={`--d: ${i * 90}ms`} href={`${base}${item.href}`} data-track="portafolio" data-track-origin={item.id}>
+            <article class="rl-port__card rl-reveal" style={`--d: ${i * 90}ms`}>
               <div class="rl-port__visual" aria-hidden="true">
                 <div class="rl-port__panel">
                   <p class="rl-port__panel-title">{item.panelTitle}</p>
@@ -603,12 +603,8 @@ const clientData = {
                 <p class="rl-port__kicker">{item.kicker}</p>
                 <h3 class="rl-port__name">{item.name}</h3>
                 <p class="rl-port__text">{item.text}</p>
-                <span class="rl-port__cta">
-                  {item.cta}
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
               </div>
-            </a>
+            </article>
           ))}
         </div>
       </div>
