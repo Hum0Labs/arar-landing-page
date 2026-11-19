@@ -15,6 +15,10 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+/* Google tag (GA4 G-9D1ENB9Y3B). Solo en producción, para no contar visitas de desarrollo. */
+const googleTagId = 'GTM-59T2T8M9';
+const analytics = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -54,6 +58,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       rel="stylesheet"
     />
     <title>{title}</title>
+    {analytics && (
+      <Fragment>
+        <script is:inline async src={`https://www.googletagmanager.com/gtm.js?id=${googleTagId}`}></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        </script>
+      </Fragment>
+    )}
   </head>
   <body>
     <slot />

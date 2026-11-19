@@ -21,10 +21,9 @@ if (root && dataEl) {
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  /* Analítica: eventos sin datos personales, listos para GTM/GA4 (dataLayer). */
+  /* Analítica: eventos sin datos personales, enviados a GA4 con la etiqueta de Google. */
   const track = (event, props = {}) => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: `alquiler_${event}`, ...props });
+    if (typeof window.gtag === 'function') window.gtag('event', `alquiler_${event}`, props);
   };
 
   $$('[data-track]').forEach((el) => {
