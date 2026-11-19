@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { company } from '../data/company';
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = 'ARAR Representaciones — Grupo tecnológico colombiano con más de 20 años de experiencia en soluciones SAP, alquiler IT, inteligencia artificial y más.',
+  description = company.description,
   noindex = false,
 } = Astro.props;
 
@@ -30,7 +31,7 @@ const analytics = import.meta.env.PROD;
     {noindex && <meta name="robots" content="noindex" />}
     {!noindex && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ARAR" />
+    <meta property="og:site_name" content={company.name} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

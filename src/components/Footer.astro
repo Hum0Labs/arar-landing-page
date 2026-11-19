@@ -1,5 +1,8 @@
 ---
+import { company, addressLine } from '../data/company';
+
 const base = import.meta.env.BASE_URL;
+const [linkedin, instagram, facebook] = company.social;
 const sections = [
   { label: 'Equipos', href: `${base}#equipos` },
   { label: 'Plataforma', href: `${base}#plataforma` },
@@ -27,11 +30,11 @@ const portfolio = [
       <div class="footer__brand">
         <a href={base} class="footer__logo">arar</a>
         <p class="footer__tagline">
-          Alquiler y arrendamiento de equipos IT para empresas en Colombia, desde 2003.
+          {company.tagline}
         </p>
         <div class="footer__social">
           <a
-            href="https://www.linkedin.com/company/arar-representaciones"
+            href={linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -42,7 +45,7 @@ const portfolio = [
             </svg>
           </a>
           <a
-            href="https://www.instagram.com/arar_representaciones"
+            href={instagram.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -53,7 +56,7 @@ const portfolio = [
             </svg>
           </a>
           <a
-            href="https://www.facebook.com/ARARRepresentaciones"
+            href={facebook.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -83,23 +86,23 @@ const portfolio = [
       <div class="footer__group">
         <h4 class="footer__group-title">Contacto</h4>
         <ul class="footer__group-list">
-          <li>Calle 169 # 67 - 55, Bogotá</li>
-          <li><a href="mailto:arar@arar.com.co">arar@arar.com.co</a></li>
-          <li>Lun–Vie, 9:00 a. m. – 6:00 p. m.</li>
+          <li>{addressLine}</li>
+          <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+          <li>{company.hours.text}</li>
         </ul>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p>&copy; 2026 ARAR Representaciones. Todos los derechos reservados.</p>
-      <p>Bogotá, Colombia</p>
+      <p>&copy; 2026 {company.longName}. Todos los derechos reservados.</p>
+      <p>{company.address.city}, {company.address.country}</p>
     </div>
   </div>
 </footer>
 
 <!-- WhatsApp floating button -->
 <a
-  href="https://wa.me/573102961407"
+  href={company.whatsappUrl}
   target="_blank"
   rel="noopener noreferrer"
   class="whatsapp-btn"
