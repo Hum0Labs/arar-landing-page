@@ -1,18 +1,26 @@
 ---
 import '../styles/global.css';
+import { company } from '../data/company';
+import { siteSchema } from '../data/schema';
 
 interface Props {
   title: string;
   description?: string;
   /** Excluye la página de los buscadores (404, páginas de trámite). */
   noindex?: boolean;
+  /** Datos estructurados de la página. Por defecto, solo la empresa. */
+  jsonLd?: object;
 }
 
 const {
   title,
-  description = 'ARAR Representaciones — Grupo tecnológico colombiano con más de 20 años de experiencia en soluciones SAP, alquiler IT, inteligencia artificial y más.',
+  description = company.description,
   noindex = false,
+  jsonLd = siteSchema,
 } = Astro.props;
+
+/* «<» escapado para que ningún texto pueda cerrar la etiqueta <script>. */
+const jsonLdText = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
@@ -30,7 +38,7 @@ const analytics = import.meta.env.PROD;
     {noindex && <meta name="robots" content="noindex" />}
     {!noindex && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ARAR" />
+    <meta property="og:site_name" content={company.name} />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -58,6 +66,7 @@ const analytics = import.meta.env.PROD;
       rel="stylesheet"
     />
     <title>{title}</title>
+    {!noindex && <script is:inline type="application/ld+json" set:html={jsonLdText} />}
     {analytics && (
       <Fragment>
         <script is:inline async src={`https://www.googletagmanager.com/gtm.js?id=${googleTagId}`}></script>

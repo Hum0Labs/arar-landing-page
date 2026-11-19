@@ -21,6 +21,8 @@ import {
   faqs,
   portfolio,
 } from '../data/alquiler';
+import { company, addressLine } from '../data/company';
+import { homeSchema } from '../data/schema';
 
 const base = import.meta.env.BASE_URL;
 const trackSteps = ['Alistamiento', 'Configuración', 'Despacho', 'Entregado'];
@@ -34,7 +36,8 @@ const clientData = {
 
 <Layout
   title="Alquiler de computadores y equipos de cómputo para empresas en Colombia | ARAR"
-  description="Alquiler de computadores, portátiles, monitores, servidores e impresoras para empresas en Colombia, con entrega local y soporte técnico incluido. Solicite su cotización."
+  description={`${company.description} Solicite su cotización.`}
+  jsonLd={homeSchema}
 >
   <script is:inline>
     document.documentElement.classList.add('rl-js');
@@ -656,7 +659,8 @@ const clientData = {
           <ul class="rl-quote__direct rl-reveal">
             <li><span>WhatsApp</span><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-origin="contacto">Escríbanos por WhatsApp</a></li>
             <li><span>Correo</span><a href={`mailto:${contact.email}`} data-track="correo" data-track-origin="contacto">{contact.email}</a></li>
-            <li><span>Horario</span>Lunes a viernes, 9:00 a. m. a 6:00 p. m.</li>
+            <li><span>Horario</span>{company.hours.text}</li>
+            <li><span>Sede</span>{addressLine}</li>
           </ul>
         </div>
 
