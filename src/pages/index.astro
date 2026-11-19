@@ -662,6 +662,8 @@ const clientData = {
 
         <div class="rl-form-wrap rl-reveal">
           <form class="rl-form" id="rl-quote-form" novalidate>
+            <!-- Trampa para bots: las personas no ven ni marcan esta casilla -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display: none" />
             <div class="rl-form__row">
               <div class="rl-field">
                 <label for="q-nombre">Nombre completo</label>
