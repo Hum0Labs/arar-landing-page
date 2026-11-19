@@ -538,11 +538,11 @@
 }
 
 .rl-hero__title {
-  max-width: 15ch;
+  max-width: 22ch;
   margin-bottom: 24px;
-  font-size: clamp(2.6rem, 7vw, 5.25rem);
+  font-size: clamp(2.25rem, 5.4vw, 4.25rem);
   font-weight: 600;
-  line-height: 0.98;
+  line-height: 1.02;
   letter-spacing: -0.045em;
   color: var(--rl-ink);
   text-wrap: balance;
