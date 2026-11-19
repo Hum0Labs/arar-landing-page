@@ -1,11 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.arar.com.co',
   base: '/',
   output: 'static',
+  integrations: [sitemap()],
   // GitHub Pages no emite 301: Astro genera una página con meta refresh,
   // noindex y canonical al destino. Cuando exista la página de categoría
   // (plan SEO, R5), se borra la entrada y la página real ocupa la URL.
