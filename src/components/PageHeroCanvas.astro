@@ -1,6 +1,6 @@
 ---
 interface Props {
-  variant: 'sap' | 'alquiler' | 'ia' | 'nativoone';
+  variant: 'alquiler' | 'ia';
 }
 const { variant } = Astro.props;
 ---
@@ -21,10 +21,8 @@ const { variant } = Astro.props;
     const P5 = p5Module.default;
 
     const pal = {
-      sap:       { a: '#6E9AC8', b: '#4F83B8', c: '#8FB2D6', dim: '#2D5A85' },
       alquiler:  { a: '#7BA3C8', b: '#5A8AB5', c: '#9DBDD6', dim: '#3B6A8F' },
       ia:        { a: '#8B93C4', b: '#6874A8', c: '#A8AED6', dim: '#3D4578' },
-      nativoone: { a: '#6DA0B8', b: '#4A7E9E', c: '#8FC0D6', dim: '#2E5A72' },
     }[variant] || { a: '#6E9AC8', b: '#4F83B8', c: '#8FB2D6', dim: '#2D5A85' };
 
     new P5((p) => {
@@ -38,91 +36,14 @@ const { variant } = Astro.props;
       p.draw = () => {
         p.clear(); t += 0.008;
         const ctx = p.drawingContext;
-        if (variant === 'sap') sapModules(ctx, t, cw, ch, pal);
-        else if (variant === 'alquiler') deviceOutlines(ctx, t, cw, ch, pal);
+        if (variant === 'alquiler') deviceOutlines(ctx, t, cw, ch, pal);
         else if (variant === 'ia') neuralBrain(ctx, t, cw, ch, pal);
-        else if (variant === 'nativoone') dashboardUI(ctx, t, cw, ch, pal);
       };
       p.windowResized = () => {
         cw = container.offsetWidth; ch = container.offsetHeight;
         if (cw > 0 && ch > 0) p.resizeCanvas(cw, ch);
       };
     });
-
-    // ═══════════════════════════════════════════
-    // SAP: Interconnected ERP module blocks
-    // ═══════════════════════════════════════════
-    function sapModules(ctx, t, w, h, c) {
-      const modules = [
-        { x: 0.15, y: 0.35, label: 'FI', size: 52 },
-        { x: 0.32, y: 0.25, label: 'CO', size: 44 },
-        { x: 0.28, y: 0.6,  label: 'MM', size: 48 },
-        { x: 0.5,  y: 0.45, label: 'SD', size: 56 },
-        { x: 0.48, y: 0.75, label: 'PP', size: 40 },
-        { x: 0.68, y: 0.3,  label: 'HCM', size: 46 },
-        { x: 0.72, y: 0.6,  label: 'ABAP', size: 50 },
-        { x: 0.88, y: 0.45, label: 'BC', size: 42 },
-        { x: 0.12, y: 0.7,  label: 'WM', size: 38 },
-        { x: 0.9,  y: 0.72, label: 'QM', size: 36 },
-      ];
-
-      // Connections between modules
-      const links = [[0,1],[0,2],[1,3],[2,3],[2,4],[3,5],[3,6],[5,7],[6,7],[4,6],[8,2],[8,0],[9,7],[9,6]];
-
-      // Draw connections with flowing particles
-      for (const [a, b] of links) {
-        const ma = modules[a], mb = modules[b];
-        const ax = ma.x * w, ay = ma.y * h, bx = mb.x * w, by = mb.y * h;
-
-        // Line
-        ctx.globalAlpha = 0.2;
-        ctx.strokeStyle = c.dim;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
-        ctx.stroke();
-
-        // Flowing particle
-        const pt = ((t * 0.5 + a * 0.3 + b * 0.2) % 1);
-        const px = ax + (bx - ax) * pt;
-        const py = ay + (by - ay) * pt;
-        ctx.globalAlpha = 0.6;
-        ctx.fillStyle = c.c;
-        ctx.beginPath();
-        ctx.arc(px, py, 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Draw module blocks
-      for (let i = 0; i < modules.length; i++) {
-        const m = modules[i];
-        const x = m.x * w, y = m.y * h;
-        const s = m.size;
-        const pulse = Math.sin(t * 2 + i * 0.8);
-
-        // Block
-        ctx.globalAlpha = 0.12 + pulse * 0.05;
-        ctx.fillStyle = c.dim;
-        rr(ctx, x - s/2, y - s/2, s, s, 8);
-        ctx.fill();
-
-        // Border
-        ctx.globalAlpha = 0.35 + pulse * 0.1;
-        ctx.strokeStyle = c.a;
-        ctx.lineWidth = 1.2;
-        rr(ctx, x - s/2, y - s/2, s, s, 8);
-        ctx.stroke();
-
-        // Label
-        ctx.globalAlpha = 0.45;
-        ctx.fillStyle = c.c;
-        ctx.font = `600 ${s * 0.28}px 'Space Grotesk', sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(m.label, x, y);
-      }
-      ctx.globalAlpha = 1;
-    }
 
     // ═══════════════════════════════════════════
     // Alquiler: Slow-moving concentric rounded rects
@@ -251,131 +172,6 @@ const { variant } = Astro.props;
         ctx.stroke();
       }
 
-      ctx.globalAlpha = 1;
-    }
-
-    // ═══════════════════════════════════════════
-    // 1nativoone: Floating dashboard UI wireframes
-    // ═══════════════════════════════════════════
-    function dashboardUI(ctx, t, w, h, c) {
-      const elements = [
-        // Cards / panels
-        { x: 0.12, y: 0.3, w: 140, h: 90,  type: 'chart',  rot: -0.03 },
-        { x: 0.38, y: 0.25, w: 160, h: 100, type: 'table',  rot: 0.02 },
-        { x: 0.7,  y: 0.35, w: 130, h: 80,  type: 'stats',  rot: -0.01 },
-        { x: 0.25, y: 0.65, w: 120, h: 75,  type: 'form',   rot: 0.04 },
-        { x: 0.55, y: 0.6,  w: 150, h: 95,  type: 'chart',  rot: -0.02 },
-        { x: 0.85, y: 0.6,  w: 110, h: 70,  type: 'kpi',    rot: 0.03 },
-        { x: 0.08, y: 0.7,  w: 80,  h: 50,  type: 'kpi',    rot: -0.05 },
-        { x: 0.9,  y: 0.2,  w: 90,  h: 60,  type: 'form',   rot: 0.01 },
-      ];
-
-      for (let i = 0; i < elements.length; i++) {
-        const el = elements[i];
-        const ex = el.x * w, ey = el.y * h;
-        const float = Math.sin(t * 0.6 + i * 0.9) * 5;
-        const pulse = Math.sin(t * 1.2 + i * 0.7);
-
-        ctx.save();
-        ctx.translate(ex, ey + float);
-        ctx.rotate(el.rot + Math.sin(t * 0.3 + i) * 0.008);
-
-        // Card background
-        ctx.globalAlpha = 0.08 + pulse * 0.03;
-        ctx.fillStyle = c.dim;
-        rr(ctx, -el.w/2, -el.h/2, el.w, el.h, 8);
-        ctx.fill();
-
-        // Card border
-        ctx.globalAlpha = 0.3 + pulse * 0.08;
-        ctx.strokeStyle = c.a;
-        ctx.lineWidth = 1;
-        rr(ctx, -el.w/2, -el.h/2, el.w, el.h, 8);
-        ctx.stroke();
-
-        // Title bar
-        ctx.globalAlpha = 0.15;
-        ctx.fillStyle = c.b;
-        rr(ctx, -el.w/2 + 8, -el.h/2 + 8, el.w * 0.4, 6, 3);
-        ctx.fill();
-
-        // Inner content based on type
-        ctx.globalAlpha = 0.2;
-        ctx.strokeStyle = c.a;
-        ctx.fillStyle = c.c;
-        ctx.lineWidth = 0.8;
-
-        if (el.type === 'chart') {
-          // Bar chart
-          const bars = 5;
-          const barW = (el.w - 30) / bars;
-          for (let b = 0; b < bars; b++) {
-            const bh = (0.3 + Math.sin(t * 1.5 + b + i) * 0.25) * (el.h - 30);
-            const bx = -el.w/2 + 12 + b * barW;
-            const by = el.h/2 - 10 - bh;
-            ctx.globalAlpha = 0.15 + Math.sin(t + b) * 0.05;
-            ctx.fillStyle = c.b;
-            rr(ctx, bx, by, barW - 4, bh, 2);
-            ctx.fill();
-          }
-        } else if (el.type === 'table') {
-          // Table rows
-          const rowH = 10;
-          for (let r = 0; r < 4; r++) {
-            const ry = -el.h/2 + 22 + r * (rowH + 6);
-            ctx.globalAlpha = 0.1;
-            ctx.beginPath();
-            ctx.moveTo(-el.w/2 + 10, ry + rowH);
-            ctx.lineTo(el.w/2 - 10, ry + rowH);
-            ctx.stroke();
-            // Cell blocks
-            ctx.globalAlpha = 0.12;
-            for (let col = 0; col < 3; col++) {
-              const cw2 = (el.w - 30) / 3;
-              rr(ctx, -el.w/2 + 10 + col * cw2 + 2, ry, cw2 - 6, rowH, 2);
-              ctx.fill();
-            }
-          }
-        } else if (el.type === 'stats') {
-          // Big number
-          ctx.globalAlpha = 0.35;
-          ctx.fillStyle = c.c;
-          ctx.font = `600 ${el.h * 0.35}px 'Space Grotesk', sans-serif`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          const num = Math.floor(85 + Math.sin(t + i) * 10);
-          ctx.fillText(num + '%', 0, -2);
-          // Subtitle line
-          ctx.globalAlpha = 0.12;
-          rr(ctx, -25, el.h * 0.22, 50, 5, 2);
-          ctx.fill();
-        } else if (el.type === 'kpi') {
-          // Circle gauge
-          ctx.globalAlpha = 0.15;
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.arc(0, 2, el.h * 0.25, 0, Math.PI * 2);
-          ctx.stroke();
-          // Filled arc
-          ctx.globalAlpha = 0.3;
-          ctx.strokeStyle = c.c;
-          const prog = 0.6 + Math.sin(t + i) * 0.2;
-          ctx.beginPath();
-          ctx.arc(0, 2, el.h * 0.25, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * prog);
-          ctx.stroke();
-        } else if (el.type === 'form') {
-          // Input fields
-          for (let f = 0; f < 3; f++) {
-            const fy = -el.h/2 + 20 + f * 18;
-            ctx.globalAlpha = 0.12;
-            ctx.strokeStyle = c.a;
-            ctx.lineWidth = 0.8;
-            rr(ctx, -el.w/2 + 10, fy, el.w - 20, 12, 4);
-            ctx.stroke();
-          }
-        }
-        ctx.restore();
-      }
       ctx.globalAlpha = 1;
     }
 
