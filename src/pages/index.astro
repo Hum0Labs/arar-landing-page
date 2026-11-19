@@ -654,8 +654,8 @@ const clientData = {
           </div>
 
           <ul class="rl-quote__direct rl-reveal">
-            <li><span>WhatsApp</span><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">Escríbanos por WhatsApp</a></li>
-            <li><span>Correo</span><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+            <li><span>WhatsApp</span><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-origin="contacto">Escríbanos por WhatsApp</a></li>
+            <li><span>Correo</span><a href={`mailto:${contact.email}`} data-track="correo" data-track-origin="contacto">{contact.email}</a></li>
             <li><span>Horario</span>Lunes a viernes, 9:00 a. m. a 6:00 p. m.</li>
           </ul>
         </div>
@@ -719,7 +719,7 @@ const clientData = {
             </p>
             <div class="rl-sent__actions" data-sent-actions>
               <a class="rl-btn rl-btn--primary" data-sent-mail href={`mailto:${contact.email}`}>Abrir el correo otra vez</a>
-              <a class="rl-btn rl-btn--outline" data-sent-wa href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">Enviar por WhatsApp</a>
+              <a class="rl-btn rl-btn--outline" data-sent-wa href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-track-origin="cotizacion_lista">Enviar por WhatsApp</a>
             </div>
             <button type="button" class="rl-link" data-sent-back>Editar la solicitud</button>
           </div>
