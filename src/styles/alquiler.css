@@ -821,10 +821,84 @@
   color: var(--rl-muted);
 }
 
-.rl-logos__list .rl-cell {
-  display: grid;
-  place-items: center;
-  min-height: 96px;
+/* Franja de clientes: sin cajas, los nombres se desplazan en un carrusel
+   continuo. La lista va dos veces para que el bucle no tenga corte. */
+.rl-logos__marquee {
+  --gap: clamp(40px, 6vw, 88px);
+  display: flex;
+  gap: var(--gap);
+  overflow: hidden;
+  padding: 18px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.rl-logos__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--gap);
+  min-width: 100%;
+  justify-content: space-around;
+  animation: rl-marquee 32s linear infinite;
+}
+
+.rl-logos__marquee:hover .rl-logos__list {
+  animation-play-state: paused;
+}
+
+@keyframes rl-marquee {
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.rl-logos__item {
+  flex: none;
+  display: flex;
+  align-items: center;
+}
+
+.rl-logos__item img {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
+.rl-logos__name {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--rl-muted);
+  transition: color 0.25s ease;
+}
+
+.rl-logos__item:hover .rl-logos__name {
+  color: var(--rl-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rl-logos__marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .rl-logos__list {
+    animation: none;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: flex-start;
+    gap: 16px var(--gap);
+  }
+
+  .rl-logos__list[aria-hidden='true'] {
+    display: none;
+  }
 }
 
 .rl-caps {

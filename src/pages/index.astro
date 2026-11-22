@@ -157,11 +157,21 @@ const clientData = {
         {customerLogos.length > 0 && (
           <div class="rl-logos rl-reveal">
             <p class="rl-logos__title">Empresas que confían en ARAR</p>
-            <ul class="rl-cells rl-logos__list" style={`--cols: ${Math.min(customerLogos.length, 6)}`}>
-              {customerLogos.map((l) => (
-                <li class="rl-cell"><img src={`${base}${l.src.replace(/^\//, '')}`} alt={l.name} loading="lazy" height="32" /></li>
+            <div class="rl-logos__marquee">
+              {[0, 1].map((copy) => (
+                <ul class="rl-logos__list" aria-hidden={copy === 1 ? 'true' : undefined}>
+                  {customerLogos.map((l) => (
+                    <li class="rl-logos__item">
+                      {l.src ? (
+                        <img src={`${base}${l.src.replace(/^\//, '')}`} alt={copy === 1 ? '' : l.name} loading="lazy" height="32" />
+                      ) : (
+                        <span class="rl-logos__name">{l.name}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
