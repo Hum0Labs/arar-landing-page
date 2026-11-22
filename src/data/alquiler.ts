@@ -54,10 +54,19 @@ export const capabilities = [
 ];
 
 /**
- * CONFIRMAR: logos de clientes aprobados. Mientras la lista esté vacía, la
- * franja de logos no se muestra. Formato: { name, src } con src en /public.
+ * Clientes aprobados para mostrarse en la franja "Empresas que confían en
+ * ARAR". Mientras la lista esté vacía, la franja no se muestra.
+ * Formato: { name } muestra el nombre como texto; { name, src } muestra el
+ * logo (src es una ruta dentro de /public).
  */
-export const customerLogos: { name: string; src: string }[] = [];
+export const customerLogos: { name: string; src?: string }[] = [
+  { name: 'Omnilife' },
+  { name: 'Innovateq' },
+  { name: 'Brake Pak' },
+  { name: 'Policlinico' },
+  { name: 'Rio Audiovisual' },
+  { name: 'Passport Colombia' },
+];
 
 /**
  * CONFIRMAR: historia de cliente real y aprobada. Mientras sea `null`, el
